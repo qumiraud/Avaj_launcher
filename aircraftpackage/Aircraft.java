@@ -1,5 +1,7 @@
 package aircraftpackage;
 
+import ownexceptionpackage.DefaultCaseException;
+
 public abstract class Aircraft extends Flyable
 {
 	protected long			id;
@@ -11,7 +13,8 @@ public abstract class Aircraft extends Flyable
 		this.id = p_id;
 		this.name = p_name;
 		this.coordinates = p_coordinates;
-		System.out.println("Aircraft constructor called");
 	};
-	public abstract void updateConditions();
+
+	public abstract void	updateConditions() throws DefaultCaseException;
+	public final String		toTowerRegisterMsg() {return this.getClass().getSimpleName() + "#" + this.name + "(" + this.id + ")";};
 }

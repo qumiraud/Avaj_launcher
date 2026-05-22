@@ -3,10 +3,9 @@ import aircraftpackage.*;
 public final class AircraftFactory {
 
 	private static volatile AircraftFactory instance;
+	private static long						id = 1;
 	
-	private AircraftFactory(){
-		System.out.println("An AircraftFactory has been created");
-	};
+	private AircraftFactory(){ };
 
 	public static AircraftFactory getInstance() {
 		AircraftFactory result = instance;
@@ -22,15 +21,11 @@ public final class AircraftFactory {
 	//@CheckReturnValue à configurer avec un builder type maven ou graddle;
 	public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates)
 	{
-		switch (p_type) {
-			case "Helicopter":
-				return new Helicopter(0, p_name, p_coordinates);
-			case "JetPlane":
-				return new JetPlane(0, p_name, p_coordinates);
-			case "Balloon":
-				return new Balloon(0, p_name, p_coordinates);
-			default:
-				return null;
-		}
+		return switch (p_type) {
+			case "Helicopter"	-> new Helicopter(id++, p_name, p_coordinates);
+			case "JetPlane"		-> new JetPlane(id++, p_name, p_coordinates);
+			case "Balloon"		-> new Balloon(id++, p_name, p_coordinates);
+			default				-> null;
+		};
 	};
 }

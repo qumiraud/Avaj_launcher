@@ -20,5 +20,5 @@ public final class WeatherProvider
 		return instance;
 	};
 
-	public static String getCurrentWeather(Coordinates p_coordinates) { return weather[(p_coordinates.getLatitude() + p_coordinates.getLongitude() + p_coordinates.getHeight()) % 3]; };
+	public static String getCurrentWeather(Coordinates p_coordinates) { return weather[((p_coordinates.getLatitude() * 7) + (p_coordinates.getLongitude() * 11) + (p_coordinates.getHeight() * 17)) % 4]; };
 }
